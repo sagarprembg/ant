@@ -1,0 +1,104 @@
+<project name="ant" default="init" basedir=".">
+
+	<property name="name" value="prem"/>
+	<property name="age" value="25"/>
+	<property name="src.dir" value="src"/>
+	<property name="test.dir" value="test"/>
+	
+
+
+	<target name="init">
+	<touch file="file1.txt"/>
+	 <mkdir dir="src.dir"/>
+	 <loadfile srcfile="file1.txt"  property="openfile"/>
+	 <echo message="${openfile}"/>
+	 <tstamp>
+         <format property="DATE" pattern="dd/mm/yyyy"/>
+         </tstamp>
+	 <echo>"${DATE}"</echo>
+	 <uptodate property="uptodate" srcfile="file1.txt" targetfile="file2"/>
+	 <echo>"${uptodate}"</echo>
+	 <available property="avilable" file="file1.txt"/>
+	 <echo>"${avilable}"</echo>
+	 <echo> "${area}"</echo>
+
+	</target>
+        
+        <target name="practice">
+        <loadproperties srcfile="build.properties">
+		<filterchain>
+		<linecontains>
+                 <contains value="area"/>
+		</linecontains>
+
+		</filterchain>
+        </loadproperties>
+	<echo>"${area}"</echo>
+	<echo>${companey}</echo>
+	<echo>${name}</echo>
+	<local name="name"/>
+	<property name="name" value="priya"/>
+	<echo>${name}</echo>
+        </target>
+
+
+	<target name="property">
+       <propertyfile file="mail.properties">
+       <entry key="car" value="indigo"/>
+       </propertyfile>
+       <echo>${car}</echo>
+       </target>
+
+
+       <target name="replace">
+
+	       <loadfile  srcfile="reader" property="reader1">
+               <filterchain>
+		       <replacetokens>
+                       <token key="read" value="readby"/>
+
+               </replacetokens>
+	       </filterchain>
+	       </loadfile>
+               <echo message="${reader1}"/>
+
+       </target>
+
+
+       <target name="copy">
+	       <copy todir="demo" flatten="true">
+		       <fileset dir="temp" >
+			       <include name="/temp1/*.java" />
+                       </fileset>
+
+               </copy>
+
+
+       </target>
+
+       <target name="delete">
+
+	       <delete dir="demo"/>
+       </target>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</project>
